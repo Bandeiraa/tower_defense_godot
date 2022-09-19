@@ -1,0 +1,141 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scripts/interface/game_user_interface.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/kenney_future_narrow.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scripts/interface/scroll_bar.gd" type="Script" id=3]
+[ext_resource path="res://scripts/interface/info_container.gd" type="Script" id=4]
+[ext_resource path="res://assets/interface/resume.png" type="Texture" id=5]
+[ext_resource path="res://scripts/interface/button_container.gd" type="Script" id=6]
+[ext_resource path="res://assets/interface/speed_up_normal.png" type="Texture" id=7]
+[ext_resource path="res://assets/interface/quit.png" type="Texture" id=8]
+
+[sub_resource type="DynamicFont" id=10]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="Theme" id=6]
+VScrollBar/styles/grabber = SubResource( 1 )
+VScrollBar/styles/grabber_highlight = SubResource( 2 )
+VScrollBar/styles/grabber_pressed = SubResource( 3 )
+VScrollBar/styles/scroll = SubResource( 4 )
+VScrollBar/styles/scroll_focus = SubResource( 5 )
+
+[node name="Interface" type="CanvasLayer" groups=["gui"]]
+script = ExtResource( 1 )
+available_cell_color = Color( 0.117647, 0.745098, 0.176471, 1 )
+unavailable_cell_color = Color( 0.745098, 0.176471, 0.117647, 1 )
+
+[node name="Preview" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="VContainer" type="VBoxContainer" parent="." groups=["info_container"]]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -96.0
+margin_right = 335.0
+margin_bottom = -20.0
+script = ExtResource( 4 )
+scroll_bar = NodePath("../RightContainer/ScrollBar")
+
+[node name="Health" type="Label" parent="VContainer"]
+margin_right = 315.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 310, 0 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 10 )
+text = "Health: 100"
+valign = 1
+
+[node name="Gold" type="Label" parent="VContainer"]
+margin_top = 40.0
+margin_right = 315.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 310, 0 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 10 )
+text = "Gold: 1.5k"
+valign = 1
+
+[node name="RightContainer" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -320.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 320, 640 )
+
+[node name="Background" type="ColorRect" parent="RightContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.301961, 0.301961, 0.301961, 1 )
+
+[node name="ScrollBar" type="ScrollContainer" parent="RightContainer"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -257.0
+margin_top = -212.0
+margin_right = -53.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 204, 424 )
+theme = SubResource( 6 )
+scroll_horizontal_enabled = false
+script = ExtResource( 3 )
+interface = NodePath("../..")
+
+[node name="Market" type="GridContainer" parent="RightContainer/ScrollBar"]
+columns = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="RightContainer" groups=["button_manager"]]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -60.0
+margin_top = -78.0
+margin_right = 60.0
+margin_bottom = -30.0
+mouse_filter = 2
+custom_constants/separation = 24
+script = ExtResource( 6 )
+
+[node name="Play" type="TextureButton" parent="RightContainer/ButtonContainer"]
+margin_right = 48.0
+margin_bottom = 48.0
+texture_normal = ExtResource( 5 )
+
+[node name="SpeedUp" type="TextureButton" parent="RightContainer/ButtonContainer"]
+margin_left = 72.0
+margin_right = 120.0
+margin_bottom = 48.0
+texture_normal = ExtResource( 7 )
+
+[node name="Quit" type="TextureButton" parent="RightContainer"]
+margin_left = 242.0
+margin_top = 30.0
+margin_right = 290.0
+margin_bottom = 78.0
+texture_normal = ExtResource( 8 )
+
+[connection signal="pressed" from="RightContainer/Quit" to="RightContainer/ButtonContainer" method="on_quit_button_pressed"]

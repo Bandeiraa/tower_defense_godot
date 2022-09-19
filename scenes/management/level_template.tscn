@@ -1,24 +1,43 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://resources/terrain_tile.tres" type="TileSet" id=1]
-[ext_resource path="res://scripts/management/path.gd" type="Script" id=2]
+[ext_resource path="res://resources/decoration_terrain.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/interface/game_user_interface.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/fake_terrain.tres" type="TileSet" id=3]
+[ext_resource path="res://scripts/management/tower_spawner.gd" type="Script" id=4]
+[ext_resource path="res://scripts/management/level_manager.gd" type="Script" id=5]
+[ext_resource path="res://scripts/management/map_manager.gd" type="Script" id=6]
 
-[node name="LevelTemplate" type="Node2D"]
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array(  )
+}
 
-[node name="Decoration" type="Node2D" parent="."]
+[node name="LevelTemplate" type="Node2D" groups=["game_manager"]]
+script = ExtResource( 5 )
 
-[node name="Terrain" type="TileMap" parent="Decoration"]
+[node name="World" type="Node2D" parent="."]
+
+[node name="BaseTerrain" type="TileMap" parent="World"]
+tile_set = ExtResource( 3 )
+format = 1
+
+[node name="Map" type="TileMap" parent="World"]
 tile_set = ExtResource( 1 )
 format = 1
 
 [node name="MapPath" type="Path2D" parent="."]
-script = ExtResource( 2 )
+curve = SubResource( 1 )
+script = ExtResource( 6 )
 
-[node name="Interface" type="CanvasLayer" parent="."]
+[node name="WaveTimer" type="Timer" parent="MapPath"]
+one_shot = true
 
-[node name="Market" type="GridContainer" parent="Interface"]
-margin_right = 40.0
-margin_bottom = 40.0
-columns = 2
+[node name="SpawnTimer" type="Timer" parent="MapPath"]
+one_shot = true
 
-[node name="TextureRect" type="TextureButton" parent="Interface/Market"]
+[node name="Tower" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="Interface" parent="." instance=ExtResource( 2 )]
+map_tile = NodePath("../World/Map")
+tower_ref = NodePath("../Tower")

@@ -1,41 +1,37 @@
-extends Sprite
-class_name Enemy
+extends PathFollow2D
 
-onready var tween: Tween = get_node("Tween")
+var already_killed: bool = false
 
-var index: int = 1
-var point_list: PoolVector2Array 
-var can_interpolate: bool = false
+export(int) var health
+export(int) var damage
+export(int) var gold_bounty
+export(int) var move_speed = 800
 
-export(float) var move_speed = 0.01
+export(PackedScene) var effect
 
-func _ready() -> void:
-	point_list = global_data.point_list
-	can_interpolate = true
+func _process(delta: float) -> void:
+	offset += move_speed * delta
 	
 	
-func _process(_delta: float) -> void:
-	if can_interpolate:
-		can_interpolate = false
-		interpolate()
+func update_health(value: int) -> void:
+	health -= value
+	if health <= 0:
+		already_killed = true
+		spawn_death_effect()
+		
+		global_data.update_gold(gold_bounty)
+		queue_free()
 		
 		
-func interpolate() -> void:
-	var _move: bool = tween.interpolate_property(
-		self,
-		"position",
-		point_list[index - 1],
-		point_list[index],
-		move_speed
-	)
-	
-	look_at(point_list[index])
-	var _start: bool = tween.start()
+func spawn_death_effect() -> void:
+	var effect_to_instance = effect.instance()
+	effect_to_instance.global_position = global_position
+	get_tree().root.call_deferred("add_child", effect_to_instance)
 	
 	
-func on_tween_finished() -> void:
-	if index == point_list.size() - 1:
+func on_screen_exited() -> void:
+	if already_killed:
 		return
 		
-	can_interpolate = true
-	index += 1
+	global_data.update_health(damage)
+	queue_free()

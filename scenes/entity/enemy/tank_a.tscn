@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/entity/enemy/enemy_template.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/enemies/tank/base_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/enemies/tank/tower_1.png" type="Texture" id=3]
+[ext_resource path="res://scenes/env/explosion_2.tscn" type="PackedScene" id=4]
+
+[node name="TankA" instance=ExtResource( 1 )]
+health = 1500
+damage = 15
+gold_bounty = 150
+move_speed = 100
+effect = ExtResource( 4 )
+
+[node name="Texture" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="Tower" type="Sprite" parent="." index="1"]
+texture = ExtResource( 3 )
+
+[node name="Notifier2D" parent="." index="2"]
+position = Vector2( 0, -1.90735e-06 )
+scale = Vector2( 3.2, 3.2 )

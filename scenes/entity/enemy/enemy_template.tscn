@@ -1,12 +1,20 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/enemies/ship/2.png" type="Texture" id=1]
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=2]
 
-[node name="Enemy" type="Sprite"]
-texture = ExtResource( 1 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 30.0
+
+[node name="Enemy" type="PathFollow2D"]
 script = ExtResource( 2 )
 
-[node name="Tween" type="Tween" parent="."]
+[node name="Texture" type="Sprite" parent="."]
 
-[connection signal="tween_all_completed" from="Tween" to="." method="on_tween_finished"]
+[node name="Notifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="EnemyArea" type="Area2D" parent="." groups=["enemy"]]
+
+[node name="Collision" type="CollisionShape2D" parent="EnemyArea"]
+shape = SubResource( 1 )
+
+[connection signal="screen_exited" from="Notifier2D" to="." method="on_screen_exited"]

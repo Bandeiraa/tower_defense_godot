@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/entity/ally/tower_template.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/turrets/base/base_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/turrets/tower/tower_1.png" type="Texture" id=3]
+[ext_resource path="res://assets/effects/muzzle/muzzle_3.png" type="Texture" id=4]
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fire"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 0.5, 0.5, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 180.0
+
+[node name="Tower1" instance=ExtResource( 1 )]
+damage = 100
+attack_cooldown = 1.5
+
+[node name="Base" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="Tower" parent="." index="1"]
+texture = ExtResource( 3 )
+
+[node name="MuzzleManager" type="Position2D" parent="Tower" index="0"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 21, 0 )
+rotation = 1.5708
+
+[node name="Muzzle1" type="Sprite" parent="Tower/MuzzleManager" index="0"]
+position = Vector2( -7, -23 )
+texture = ExtResource( 4 )
+
+[node name="Muzzle2" type="Sprite" parent="Tower/MuzzleManager" index="1"]
+position = Vector2( 6, -23 )
+texture = ExtResource( 4 )
+
+[node name="Animation" type="AnimationPlayer" parent="Tower/MuzzleManager" index="2"]
+anims/RESET = SubResource( 3 )
+anims/fire = SubResource( 2 )
+
+[node name="Collision" parent="." index="2"]
+visible = false
+position = Vector2( 32, 32 )
+shape = SubResource( 1 )

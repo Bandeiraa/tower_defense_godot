@@ -1,0 +1,191 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/fonts/kenney_future_narrow.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://resources/decoration_terrain.tres" type="TileSet" id=2]
+[ext_resource path="res://scripts/interface/initial_screen.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 1 )
+
+[node name="InitialScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.364706, 0.470588, 0.341176, 1 )
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 120.0
+margin_top = -112.0
+margin_right = 180.0
+margin_bottom = 112.0
+
+[node name="Play" type="Button" parent="ButtonsContainer" groups=["button"]]
+margin_right = 180.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 180, 72 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Text" type="Label" parent="ButtonsContainer/Play"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -90.0
+margin_top = -36.0
+margin_right = 90.0
+margin_bottom = 36.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 1 )
+text = "Play"
+valign = 1
+
+[node name="Load" type="Button" parent="ButtonsContainer" groups=["button"]]
+margin_top = 76.0
+margin_right = 180.0
+margin_bottom = 148.0
+rect_min_size = Vector2( 180, 72 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Text" type="Label" parent="ButtonsContainer/Load"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -90.0
+margin_top = -36.0
+margin_right = 90.0
+margin_bottom = 36.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 1 )
+text = "Load"
+valign = 1
+
+[node name="Quit" type="Button" parent="ButtonsContainer" groups=["button"]]
+margin_top = 152.0
+margin_right = 180.0
+margin_bottom = 224.0
+rect_min_size = Vector2( 180, 72 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Text" type="Label" parent="ButtonsContainer/Quit"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -90.0
+margin_top = -36.0
+margin_right = 90.0
+margin_bottom = 36.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 1 )
+text = "Quit"
+valign = 1
+
+[node name="Decoration" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+format = 1
+tile_data = PoolIntArray( 0, 10, 0, 19, 10, 0, 65537, 9, 0, 65542, 8, 0, 65543, 8, 0, 65544, 8, 0, 65545, 7, 0, 65547, 8, 0, 65548, 8, 0, 65549, 8, 0, 65551, 8, 0, 65552, 7, 0, 65553, 7, 0, 65554, 8, 0, 131078, 8, 0, 131079, 7, 0, 131080, 7, 0, 131081, 8, 0, 131083, 8, 0, 131084, 7, 0, 131085, 7, 0, 131087, 8, 0, 131088, 7, 0, 131089, 7, 0, 131090, 8, 0, 196614, 8, 0, 196615, 7, 0, 196616, 7, 0, 196617, 8, 0, 196619, 8, 0, 196620, 7, 0, 196621, 7, 0, 196623, 8, 0, 196624, 7, 0, 196625, 7, 0, 196626, 8, 0, 262150, 8, 0, 262151, 7, 0, 262152, 7, 0, 262153, 8, 0, 262155, 8, 0, 262156, 8, 0, 262157, 8, 0, 262159, 8, 0, 262160, 7, 0, 262161, 7, 0, 262162, 8, 0, 327686, 8, 0, 327687, 7, 0, 327688, 7, 0, 327689, 8, 0, 327691, 8, 0, 327692, 7, 0, 327693, 7, 0, 327695, 8, 0, 327696, 7, 0, 327697, 7, 0, 327698, 8, 0, 393222, 8, 0, 393223, 7, 0, 393224, 7, 0, 393225, 8, 0, 393227, 8, 0, 393228, 7, 0, 393229, 7, 0, 393231, 8, 0, 393232, 7, 0, 393233, 7, 0, 393234, 8, 0, 458758, 8, 0, 458759, 8, 0, 458760, 8, 0, 458761, 7, 0, 458763, 8, 0, 458764, 8, 0, 458765, 8, 0, 458767, 7, 0, 458768, 8, 0, 458769, 8, 0, 458770, 7, 0, 524289, 9, 0, 524306, 9, 0, 589824, 10, 0, 589843, 10, 0 )
+
+[node name="LevelContainer" type="VBoxContainer" parent="."]
+visible = false
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 60.0
+margin_top = -112.0
+margin_right = 330.0
+margin_bottom = 112.0
+
+[node name="Level1" type="Button" parent="LevelContainer" groups=["button"]]
+margin_right = 270.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 270, 72 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="Text" type="Label" parent="LevelContainer/Level1"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -135.0
+margin_top = -36.0
+margin_right = 135.0
+margin_bottom = 36.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 1 )
+text = "Level 1"
+valign = 1
+
+[node name="Level2" type="Button" parent="LevelContainer" groups=["button"]]
+margin_top = 76.0
+margin_right = 270.0
+margin_bottom = 148.0
+rect_min_size = Vector2( 180, 72 )
+focus_mode = 0
+disabled = true
+enabled_focus_mode = 0
+flat = true
+
+[node name="Text" type="Label" parent="LevelContainer/Level2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -143.0
+margin_top = -36.0
+margin_right = 143.0
+margin_bottom = 36.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 1 )
+text = "Level 2"
+valign = 1
+
+[node name="Level3" type="Button" parent="LevelContainer" groups=["button"]]
+margin_top = 152.0
+margin_right = 270.0
+margin_bottom = 224.0
+rect_min_size = Vector2( 180, 72 )
+focus_mode = 0
+disabled = true
+enabled_focus_mode = 0
+flat = true
+
+[node name="Text" type="Label" parent="LevelContainer/Level3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -143.0
+margin_top = -36.0
+margin_right = 143.0
+margin_bottom = 36.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 1 )
+text = "Level 3"
+valign = 1
